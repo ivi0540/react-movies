@@ -14,7 +14,11 @@ class Main extends React.Component {
   componentDidMount() {
     fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=matrix&page=1`)
       .then((response) => response.json())
-      .then((data) => this.setState({ movies: data.Search, loading: false }));
+      .then((data) => this.setState({ movies: data.Search, loading: false }))
+      .catch((err) => {
+        console.error(err);
+        this.setState({ loading: false });
+      });
   }
 
   searchMovie = (movieName, type = "all") => {
@@ -25,7 +29,11 @@ class Main extends React.Component {
       }`
     )
       .then((response) => response.json())
-      .then((data) => this.setState({ movies: data.Search, loading: false }));
+      .then((data) => this.setState({ movies: data.Search, loading: false }))
+      .catch((err) => {
+        console.error(err);
+        this.setState({ loading: false });
+      });
   };
 
   render() {
